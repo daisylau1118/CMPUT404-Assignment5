@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 import flask
-from flask import Flask, request
+from flask import Flask, request, redirect
 from flask_sockets import Sockets
 import gevent
 from gevent import queue
@@ -27,6 +27,13 @@ sockets = Sockets(app)
 app.debug = True
 
 clients = list()
+
+def send_all(msg):
+    for client in clients:
+        client.put( msg )
+
+def send_all_json(obj):
+    send_all( json.dumps(obj) )
 
 class Client:
     def __init__(self):
@@ -101,6 +108,7 @@ def read_ws(ws,client):
             else:
                 break
     except:
+        '''Done'''
 
 @sockets.route('/subscribe')
 def subscribe_socket(ws):

@@ -133,9 +133,8 @@ function addEntity(entity, data) {
     world[entity] = data;
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just modified!
-
-    var url = window.location.origin + "/entity/" + entity;
-    sendJSONXMLHTTPRequest(url, data, function(){});
+    
+    socket.send(JSON.stringify({[entity]:data}))
 }
 
 var counter = 0;
@@ -277,7 +276,10 @@ function wsSetup() {
             //XXX: TODO What are you going to do here?
             
             var message = JSON.parse(msg.data);
-            update()
+            for (let key in message) {
+              world[key] = message[key];
+              drawNextFrame();
+            }
         } catch (e) {
             alert("socket on message: " + e);
         }
@@ -286,12 +288,8 @@ function wsSetup() {
 
 wsSetup();
 
-
-
-
 // 30 frames per second
 setInterval( update, 1000/30.0);
-
 
     </script>
 </body>

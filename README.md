@@ -22,6 +22,8 @@ Contributors / Licensing
 
 Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle.
 
+Modifications is LICENSE'D under the Apache 2 license by Daisy Lau.
+
 freetests.py is LICENSE'D under a BSD-like license:
 
 From ws4py
@@ -59,3 +61,7 @@ Contributors
 * Mark Galloway
 * Abram Hindle
 * Cole Mackenzie
+
+References
+============
+https://github.com/abramhindle/WebSocketsExamples
